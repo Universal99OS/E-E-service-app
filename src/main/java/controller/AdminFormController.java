@@ -24,4 +24,25 @@ public class AdminFormController {
             e.printStackTrace();
         }
     }
+
+    public void manageItemsBtnOnAction(ActionEvent actionEvent) {
+    }
+
+    public void manageMembersrBtnOnAction(ActionEvent actionEvent) {
+    }
+
+    public void updatePasswordBtnOnAction(ActionEvent actionEvent) {
+    }
+
+    public void viewOrdersBtnOnAction(ActionEvent actionEvent) {
+    }
+
+    public void reportsBtnOnAction(ActionEvent actionEvent) {
+    }
+
+    public void salesReportsBtnOnAction(ActionEvent actionEvent) {
+    }
+
+    public void placeOrderBtnOnAction(ActionEvent actionEvent) {
+    }
 }

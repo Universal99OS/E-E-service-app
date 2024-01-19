@@ -96,7 +96,6 @@ public class AllCustomersController {
 
     public void backBtnOnAction(MouseEvent mouseEvent) {
         Stage stage = (Stage) pane.getScene().getWindow();
-
         try {
             stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/manageCustomer.fxml"))));
             stage.show();
