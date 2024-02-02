@@ -31,11 +31,13 @@
          </font>
       </JFXButton>
 
-      <JFXButton contentDisplay="GRAPHIC_ONLY" layoutX="35.0" layoutY="347.0" onAction="#backButtonOnAction" text="Back" />
-      <ImageView fitHeight="28.0" fitWidth="34.0" layoutX="139.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../Assets/bckimg.png" />
-         </image>
-      </ImageView>
+      <JFXButton contentDisplay="GRAPHIC_ONLY" layoutX="139.0" layoutY="46.0" onAction="#backButtonOnAction" text="Back">
+         <graphic>
+            <ImageView fitHeight="28.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Assets/bckimg.png" />
+               </image>
+            </ImageView>
+         </graphic></JFXButton>
    </children>
 </AnchorPane>

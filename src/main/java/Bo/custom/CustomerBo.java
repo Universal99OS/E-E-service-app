@@ -11,4 +11,5 @@ import java.util.List;
 public interface CustomerBo extends CrudBo<CustomerDto> {
 
     public List<CustomerTm> getAllTm(AllCustomersController acc);
+
 }

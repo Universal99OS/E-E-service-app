@@ -4,9 +4,10 @@ import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
 @ToString
@@ -15,5 +16,14 @@ public class Orders {
     @Id
     private String orderId;
     private String date;
-    private int contactNum;
+
+    @ManyToOne()
+    @JoinColumn(name="contactNum",nullable = false)
+    private Customer customer;
+
+
+    public Orders(String orderId, String date) {
+        this.orderId = orderId;
+        this.date = date;
+    }
 }

@@ -44,5 +44,12 @@ public class AdminFormController {
     }
 
     public void placeOrderBtnOnAction(ActionEvent actionEvent) {
+        Stage stage = (Stage) pane.getScene().getWindow();
+        try {
+            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/placeOrderForm.fxml"))));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        stage.show();
     }
 }

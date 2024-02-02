@@ -14,6 +14,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.cell.TreeItemPropertyValueFactory;
@@ -78,13 +79,20 @@ public class AllCustomersController {
     }
 
     public void updateOnAction(ActionEvent actionEvent) {
-        customerBo.update(new CustomerDto(
+        boolean update = customerBo.update(new CustomerDto(
                 contactNumId.getText(),
                 nameId.getText(),
                 emailId.getText(),
                 Integer.parseInt(orderQtyId.getText())
         ));
-        loadCustomerTable();
+
+        if(update){
+            new Alert(Alert.AlertType.CONFIRMATION,"Succefully Updated").show();
+            loadCustomerTable();
+        }else {
+            new Alert(Alert.AlertType.ERROR,"Something went wrong!!!").show();
+        }
+
     }
 
     public void refreshOnAction(ActionEvent actionEvent) {
