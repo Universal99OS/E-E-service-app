@@ -1,0 +1,104 @@
+package dao.custom.impl;
+
+import dao.custom.ItemDao;
+import dao.util.HibernateUtil;
+import dto.ItemDto;
+import entity.Item;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.query.Query;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class ItemDaoImpl implements ItemDao {
+    @Override
+    public boolean save(ItemDto dto) {
+        Item item=new Item(dto.getItemId(),
+                dto.getDescription(),
+                dto.getName(),
+                dto.getCategory(),
+                dto.getStatus());
+
+        Session session = HibernateUtil.getSession();
+        Transaction transaction = session.beginTransaction();
+        session.save(item);
+        transaction.commit();
+        session.close();
+        return true;
+    }
+
+    @Override
+    public boolean delete(ItemDto dto) {
+        Item item=new Item(dto.getItemId(),
+                dto.getDescription(),
+                dto.getName(),
+                dto.getCategory(),
+                dto.getStatus());
+
+        Session session = HibernateUtil.getSession();
+        Transaction transaction = session.beginTransaction();
+        session.delete(item);
+        transaction.commit();
+        session.close();
+        return true;
+    }
+
+    @Override
+    public boolean update(ItemDto dto) {
+        Item item=new Item(dto.getItemId(),
+                dto.getDescription(),
+                dto.getName(),
+                dto.getCategory(),
+                dto.getStatus());
+
+        Session session = HibernateUtil.getSession();
+        Transaction transaction = session.beginTransaction();
+        Item item1 = session.find(Item.class, item);
+        item1.setItemId(item.getItemId());
+        item1.setDescription(item.getDescription());
+        item1.setName(item.getName());
+        item1.setCategory(item.getCategory());
+        item1.setStatus(item.getStatus());
+        session.save(item1);
+        transaction.commit();
+        session.close();
+
+        return true;
+    }
+
+    @Override
+    public List<ItemDto> getAll() {
+        Session session = HibernateUtil.getSession();
+        Query query = session.createQuery("FROM Item");
+        List<Item> list = query.list();
+
+        List<ItemDto> itemDtos=new ArrayList<>();
+
+        for (Item item:list) {
+            itemDtos.add(new ItemDto(
+                    item.getItemId(),
+                    item.getDescription(),
+                    item.getName(),
+                    item.getCategory(),
+                    item.getStatus()
+            ));
+        }
+        return itemDtos;
+    }
+
+    @Override
+    public String getNextItemId() {
+        Session session = HibernateUtil.getSession();
+        Item lastItem = session.createQuery("FROM Item ORDER BY itemId DESC", Item.class)
+                .setMaxResults(1)
+                .uniqueResult();
+
+        if(lastItem!=null){
+            int i = Integer.parseInt(lastItem.getItemId());
+            return String.valueOf(++i);
+        }else {
+            return "1";
+        }
+    }
+}

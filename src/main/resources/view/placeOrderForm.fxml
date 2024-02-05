@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
+<?import javafx.scene.control.TreeTableColumn?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="pane" prefHeight="483.0" prefWidth="649.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PlaceOrderFormController">
+   <children>
+      <ImageView fitHeight="493.0" fitWidth="722.0" layoutY="-4.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Assets/gra-bg%207.jpg" />
+         </image>
+      </ImageView>
+      <JFXComboBox fx:id="customersComboBoxId" layoutX="35.0" layoutY="43.0" prefHeight="25.0" prefWidth="194.0" promptText="Search Customer" />
+      <JFXButton buttonType="RAISED" layoutX="424.0" layoutY="39.0" onAction="#addNewCustomerOnAction" style="-fx-background-color: #ffffff;" text="Add New Customer" />
+      <Text fx:id="orderId" fill="#00aeff" layoutX="568.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Order Id" textAlignment="CENTER" wrappingWidth="84.16064453125">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Text>
+      <JFXTextField fx:id="itemId" layoutX="21.0" layoutY="105.0" promptText="ItemId" />
+      <JFXTextField fx:id="itemNameId" layoutX="177.0" layoutY="105.0" promptText="Name" />
+      <JFXComboBox fx:id="categoryComboBoxId" layoutX="337.0" layoutY="105.0" promptText="Category" />
+      <JFXComboBox fx:id="statusComboBoxId" layoutX="475.0" layoutY="105.0" promptText="Status" />
+      <JFXTextField fx:id="descriptionId" layoutX="21.0" layoutY="152.0" prefHeight="27.0" prefWidth="310.0" promptText="Description" />
+      <Text layoutX="576.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2024/01/19" wrappingWidth="66.21630859375" />
+      <JFXTreeTableView fx:id="tableId" layoutX="21.0" layoutY="245.0" prefHeight="228.0" prefWidth="660.0">
+         <columns>
+            <TreeTableColumn fx:id="itemIdCol" prefWidth="75.0" text="Item Id" />
+            <TreeTableColumn fx:id="nameCol" prefWidth="75.0" text="Name" />
+            <TreeTableColumn fx:id="categoryCol" prefWidth="89.0" text="Category" />
+            <TreeTableColumn fx:id="statusCol" prefWidth="67.0" text="Status" />
+            <TreeTableColumn fx:id="descriptionCol" prefWidth="244.43923950195312" text="Description" />
+            <TreeTableColumn fx:id="optionCol" prefWidth="105.560791015625" text="Option" />
+         </columns>
+      </JFXTreeTableView>
+      <JFXTextField fx:id="cusNameId" layoutX="254.0" layoutY="41.0" promptText="Name" />
+      <JFXButton buttonType="RAISED" layoutX="402.0" layoutY="151.0" onAction="#addItemOnAction" style="-fx-background-color: #ffffff;" text="Add Item" />
+      <JFXButton buttonType="RAISED" layoutX="500.0" layoutY="151.0" onAction="#placeOrderOnAction" style="-fx-background-color: #ffffff;" text="Place Order" />
+      <JFXButton buttonType="RAISED" layoutX="48.0" layoutY="196.0" onAction="#backBtnOnAction" style="-fx-background-color: #ffffff;" text="Back" />
+   </children>
+</AnchorPane>
