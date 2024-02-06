@@ -11,12 +11,14 @@ import java.io.IOException;
 public class AdminFormController {
     public AnchorPane pane;
 
+
     public void clickBtnOnAction(ActionEvent actionEvent) {
         System.out.println("Clicked");
     }
 
     public void manageCustomerBtnOnAction(ActionEvent actionEvent) {
         Stage stage = (Stage)pane.getScene().getWindow();
+
         try {
             stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/manageCustomer.fxml"))));
             stage.show();
@@ -29,6 +31,13 @@ public class AdminFormController {
     }
 
     public void manageMembersrBtnOnAction(ActionEvent actionEvent) {
+        Stage stage = (Stage)pane.getScene().getWindow();
+        try {
+            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/manageMembersForm.fxml"))));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void updatePasswordBtnOnAction(ActionEvent actionEvent) {
@@ -44,7 +53,7 @@ public class AdminFormController {
     }
 
     public void placeOrderBtnOnAction(ActionEvent actionEvent) {
-        Stage stage = (Stage) pane.getScene().getWindow();
+        Stage stage = (Stage)pane.getScene().getWindow();
         try {
             stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/placeOrderForm.fxml"))));
         } catch (IOException e) {
