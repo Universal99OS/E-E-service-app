@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginFormController">
+   <children>
+      <ImageView fitHeight="497.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Assets/gra-bg%207.jpg" />
+         </image>
+      </ImageView>
+      <JFXButton buttonType="RAISED" layoutX="122.0" layoutY="48.0" prefHeight="318.0" prefWidth="356.0" style="-fx-background-color: #ffffff;" text=" " />
+      <Text fill="#796e6e" layoutX="182.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to Login Form" wrappingWidth="252.6472886029412">
+         <font>
+            <Font name="Apple Symbols" size="25.0" />
+         </font>
+      </Text>
+      <Text layoutX="146.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email" wrappingWidth="49.478515625">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="146.0" layoutY="203.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <JFXTextField fx:id="emailId" layoutX="247.0" layoutY="111.0" prefHeight="27.0" prefWidth="218.0" />
+      <JFXTextField fx:id="passwordId" layoutX="247.0" layoutY="172.0" prefHeight="27.0" prefWidth="218.0" />
+      <JFXButton layoutX="344.0" layoutY="239.0" onAction="#loginOnAction" style="-fx-background-color: #84d511;" text="Login" textFill="#fcfcfc">
+         <font>
+            <Font name="Apple Braille" size="26.0" />
+         </font></JFXButton>
+   </children>
+</AnchorPane>
