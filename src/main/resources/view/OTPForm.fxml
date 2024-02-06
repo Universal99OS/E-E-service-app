@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="336.0" prefWidth="478.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.OTPFormController">
+    <children>
+        <ImageView fitHeight="338.0" fitWidth="496.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../Assets/gra-bg%207.jpg" />
+            </image>
+        </ImageView>
+        <JFXButton buttonType="RAISED" layoutX="60.0" layoutY="27.0" prefHeight="240.0" prefWidth="356.0" style="-fx-background-color: #ffffff;" text=" " />
+        <Text fill="#796e6e" layoutX="174.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="OTP confirm message" wrappingWidth="225.6472886029412">
+            <font>
+                <Font name="Apple Symbols" size="25.0" />
+            </font>
+        </Text>
+        <Text layoutX="76.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="OTP">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Text>
+
+        <JFXTextField fx:id="otpID" layoutX="178.0" layoutY="122.0" prefHeight="27.0" prefWidth="218.0" />
+        <JFXButton fx:id="submitBtnID" layoutX="297.0" layoutY="189.0" onAction="#submitBtnOnAction" style="-fx-background-color: #84d511;" text="Submit" textFill="#fcfcfc">
+            <font>
+                <Font name="Apple Braille" size="17.0" />
+            </font></JFXButton>
+      <JFXButton layoutX="70.0" layoutY="37.0" onAction="#backBtnOnAction" text="Back" />
+    </children>
+
+</AnchorPane>

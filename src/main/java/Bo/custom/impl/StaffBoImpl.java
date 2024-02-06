@@ -1,14 +1,20 @@
 package Bo.custom.impl;
 
 import Bo.custom.StaffBo;
+import Email.EmailService;
 import dao.DaoFactory;
 import dao.custom.StaffDao;
 import dao.util.BoType;
 import dto.StaffDto;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.List;
 
 public class StaffBoImpl implements StaffBo {
+    EmailService emailService=new EmailService();
     StaffDao staffDao= DaoFactory.getInstance().getDao(BoType.STAFF);
     @Override
     public boolean save(StaffDto dto) {
@@ -34,4 +40,6 @@ public class StaffBoImpl implements StaffBo {
     public boolean isValidLoginData(String email, String password) {
         return staffDao.isValidLoginData(email,password);
     }
+
+
 }

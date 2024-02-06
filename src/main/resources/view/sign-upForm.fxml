@@ -16,7 +16,7 @@
                 <Image url="@../Assets/gra-bg%207.jpg" />
             </image>
         </ImageView>
-        <JFXButton buttonType="RAISED" layoutX="109.0" layoutY="57.0" prefHeight="319.0" prefWidth="376.0" style="-fx-background-color: #ffffff;" text=" " />
+        <JFXButton buttonType="RAISED" layoutX="109.0" layoutY="57.0" prefHeight="319.0" prefWidth="462.0" style="-fx-background-color: #ffffff;" text=" " />
         <Text fill="#796e6e" layoutX="214.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to Sign-Up Form" wrappingWidth="252.6472886029412">
             <font>
                 <Font name="Apple Symbols" size="25.0" />
@@ -34,9 +34,9 @@
         </Text>
         <JFXTextField fx:id="emailId" layoutX="247.0" layoutY="155.0" prefHeight="21.0" prefWidth="218.0" />
         <JFXTextField fx:id="passwordId" layoutX="247.0" layoutY="193.0" prefHeight="27.0" prefWidth="218.0" />
-        <JFXButton layoutX="349.0" layoutY="301.0" onAction="#signOnAction" style="-fx-background-color: #84d511;" text="Sign-Up" textFill="#fcfcfc">
+        <JFXButton fx:id="signUpBtnID" layoutX="399.0" layoutY="331.0" onAction="#signOnAction" style="-fx-background-color: #84d511;" text="Sign-Up" textFill="#fcfcfc">
             <font>
-                <Font name="Apple Braille" size="26.0" />
+                <Font name="Apple Braille" size="15.0" />
             </font></JFXButton>
       <Text layoutX="140.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contact Num" wrappingWidth="110.478515625">
          <font>
@@ -57,6 +57,14 @@
       </Text>
       <JFXComboBox fx:id="userComboId" layoutX="246.0" layoutY="238.0" prefHeight="27.0" prefWidth="218.0" />
       <JFXButton layoutX="117.0" layoutY="58.0" onAction="#backOnAction" style="-fx-background-color: #3a86ff;" text="Back" textFill="WHITE" />
+      <Text layoutX="140.0" layoutY="314.0" strokeType="OUTSIDE" strokeWidth="0.0" text="OTP">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <JFXTextField fx:id="otpID" layoutX="247.0" layoutY="283.0" prefHeight="21.0" prefWidth="218.0" />
+      <JFXButton layoutX="486.0" layoutY="157.0" onAction="#sendOtpOnAction" style="-fx-background-color: #25a18e;" text="Send OTP" textFill="WHITE" />
+      <JFXButton layoutX="480.0" layoutY="283.0" onAction="#confirmOtpOnAction" style="-fx-background-color: #25a18e;" text="Confirm OTP" textFill="WHITE" />
     </children>
 
 </AnchorPane>
