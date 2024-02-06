@@ -34,11 +34,12 @@ public class LoginFormController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            try {
-                emailService.sendEmail("goldenmart5000@gmail.com","testing","hello world");
-            } catch (MessagingException e) {
-                e.printStackTrace();
-            }
+//            try {
+//                emailService.sendEmail("goldenmart5000@gmail.com","testing","hello world");
+//                emailService.sendOtp("goldenmart5000@gmail.com");
+//            } catch (MessagingException e) {
+//                e.printStackTrace();
+//            }
         }else{
             new Alert(Alert.AlertType.ERROR,"Something went wrong, Please Re-try").show();
         }

@@ -6,6 +6,7 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Properties;
+import java.util.Random;
 
 public class EmailService {
     public void sendEmail(String to,String subject,String body) throws MessagingException {
@@ -34,5 +35,24 @@ public class EmailService {
 
         Transport.send(message);
         System.out.println("Email sent successfully to " + to);
+    }
+
+    public String sendOtp(String to){
+        String otp = generateOTP();
+        String body=String.format("Your OTP: %s",otp);
+        try {
+            sendEmail(to,"Your OTP Message",body);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+
+        return otp;
+    }
+
+    private String generateOTP() {
+        Random random = new Random();
+        int number=3000+random.nextInt(5000+10);
+        return String.valueOf(number);
+
     }
 }
