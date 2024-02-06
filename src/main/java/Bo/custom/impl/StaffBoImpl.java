@@ -29,4 +29,9 @@ public class StaffBoImpl implements StaffBo {
     public List<StaffDto> getAll() {
         return staffDao.getAll();
     }
+
+    @Override
+    public boolean isValidLoginData(String email, String password) {
+        return staffDao.isValidLoginData(email,password);
+    }
 }

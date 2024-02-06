@@ -93,4 +93,18 @@ public class StaffDaoImpl implements StaffDao {
         }
         return list1;
     }
+
+    @Override
+    public boolean isValidLoginData(String email, String password) {
+        Session session = HibernateUtil.getSession();
+        Query query = session.createQuery("FROM Staff s where s.email=:emailValue AND s.password=:passwordValue");
+
+        query.setParameter("emailValue",email);
+        query.setParameter("passwordValue",password);
+
+        List<Staff> list = query.list();
+        session.close();
+
+        return  !list.isEmpty();
+    }
 }
