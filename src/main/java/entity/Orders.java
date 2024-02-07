@@ -2,10 +2,8 @@ package entity;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import java.util.List;
 
 @NoArgsConstructor
 @Getter
@@ -20,6 +18,10 @@ public class Orders {
     @ManyToOne()
     @JoinColumn(name="contactNum",nullable = false)
     private Customer customer;
+
+    @OneToMany(mappedBy = "orders")
+    List<Item> items;
+
 
 
     public Orders(String orderId, String date) {

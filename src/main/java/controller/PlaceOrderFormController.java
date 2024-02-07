@@ -48,6 +48,8 @@ public class PlaceOrderFormController {
     private CustomerBo customerBo= BoFactory.getInstance().getBO(BoType.CUSTOMER);
     private ItemBo itemBo=BoFactory.getInstance().getBO(BoType.ITEM);
 
+    private int itemIdNum= Integer.parseInt(itemBo.getNextItemId());
+
     public void initialize(){
         itemIdCol.setCellValueFactory(new TreeItemPropertyValueFactory<>("itemId"));
         descriptionCol.setCellValueFactory(new TreeItemPropertyValueFactory<>("description"));
@@ -70,6 +72,11 @@ public class PlaceOrderFormController {
         } ));
 
         setItemId();
+        setOrderID();
+    }
+
+    private void setOrderID() {
+
     }
 
     private void loadStatus() {
@@ -93,7 +100,7 @@ public class PlaceOrderFormController {
     }
 
     private void setItemId() {
-        itemId.setText(itemBo.getNextItemId());
+        itemId.setText(String.valueOf(itemIdNum));
         itemId.setEditable(false);
     }
 
@@ -114,16 +121,7 @@ public class PlaceOrderFormController {
     }
 
     public void addItemOnAction(ActionEvent actionEvent) {
-        final String[] cate = {null};
-        final String[] sta = {null};
-
-        categoryComboBoxId.getSelectionModel().selectedItemProperty().addListener((observableValue, oldvalue, category) -> {
-            cate[0] = (String) category;
-        });
-
-        statusComboBoxId.getSelectionModel().selectedItemProperty().addListener((observableValue, o, status) -> {
-            sta[0] = (String) status;
-        });
+        itemIdNum++;
 
         JFXButton button = new JFXButton("Delete");
 
@@ -132,10 +130,14 @@ public class PlaceOrderFormController {
                 itemId.getText(),
                 descriptionId.getText(),
                 itemNameId.getText(),
-                cate[0],
-                sta[0],
+                categoryComboBoxId.getSelectionModel().getSelectedItem().toString(),
+                statusComboBoxId.getSelectionModel().getSelectedItem().toString(),
                 button
         );
+
+        button.setOnAction(actionEvent1 -> {
+            itemTms.remove(itemTm);
+        });
 
         itemTms.add(itemTm);
 
@@ -157,6 +159,7 @@ public class PlaceOrderFormController {
 
 
     public void placeOrderOnAction(ActionEvent actionEvent) {
+
     }
 
     public void backBtnOnAction(ActionEvent actionEvent) {
