@@ -1,9 +1,13 @@
 package controller;
 
+import Bo.BoFactory;
+import Bo.custom.StaffBo;
 import Email.EmailService;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import dao.util.BoType;
+import dto.StaffDto;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -28,6 +32,8 @@ public class SignUpFormController {
     public JFXButton signUpBtnID;
     String otp;
 
+    StaffBo staffBo= BoFactory.getInstance().getBO(BoType.STAFF);
+
     public void initialize(){
         setUserTypes();
         signUpBtnID.setDisable(true);
@@ -44,6 +50,32 @@ public class SignUpFormController {
 
 
     public void signOnAction(ActionEvent actionEvent) {
+        Object selectedItem = userComboId.getSelectionModel().getSelectedItem();
+        String selectedValue = null;
+        try {
+            selectedValue = selectedItem.toString();
+            System.out.println(selectedValue);
+        }catch (NullPointerException e){
+            e.printStackTrace();
+        }
+
+        if(!passwordId.getText().isEmpty() && !contactNumId.getText().isEmpty() && !nameId.getText().isEmpty() && selectedValue!=null){
+            boolean save = staffBo.save(new StaffDto(
+                    contactNumId.getText(),
+                    nameId.getText(),
+                    emailId.getText(),
+                    passwordId.getText(),
+                    selectedValue
+            ));
+
+            if(save){
+                new Alert(Alert.AlertType.CONFIRMATION,"Succefully added new staff member").show();
+            }else {
+                new Alert(Alert.AlertType.ERROR,"Something went wrong, Please re-try");
+            }
+        }else {
+            new Alert(Alert.AlertType.ERROR,"Please make sure to fill the all fields").show();
+        }
 
 
 
