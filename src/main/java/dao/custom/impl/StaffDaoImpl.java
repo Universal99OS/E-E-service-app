@@ -61,13 +61,7 @@ public class StaffDaoImpl implements StaffDao {
 
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
-        Staff staff = session.find(Staff.class, entity);
-        staff.setContactNum(entity.getContactNum());
-        staff.setName(entity.getName());
-        staff.setEmail(entity.getEmail());
-        staff.setPassword(entity.getPassword());
-        staff.setUserType(entity.getUserType());
-        session.save(staff);
+        session.update(entity);
         transaction.commit();
         session.close();
         return true;

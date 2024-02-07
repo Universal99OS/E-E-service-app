@@ -13,6 +13,13 @@ public class ManageMembersFormController {
     public AnchorPane pane;
 
     public void allMembersOnAction(ActionEvent actionEvent) {
+        Stage stage = (Stage) pane.getScene().getWindow();
+        try {
+            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/allMembersForm.fxml"))));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void addNewMembersOnAction(ActionEvent actionEvent) {

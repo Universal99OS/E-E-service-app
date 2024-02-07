@@ -6,12 +6,13 @@ import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.io.Serializable;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @Entity
-public class Staff {
+public class Staff{
     @Id
     private String contactNum;
     private String name;
