@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
+<?import javafx.scene.control.TreeTableColumn?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AllItemsFormController">
+    <children>
+        <ImageView fitHeight="560.0" fitWidth="990.0" layoutX="-1.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../Assets/gra-bg%207.jpg" />
+            </image>
+        </ImageView>
+        <JFXTextField fx:id="itemId" layoutX="14.0" layoutY="34.0" promptText="Contact Num" text="Item ID" />
+        <JFXTextField fx:id="nameId" layoutX="169.0" layoutY="34.0" prefHeight="27.0" prefWidth="137.0" promptText="Name" />
+        <JFXTextField fx:id="descriptionId" layoutX="319.0" layoutY="34.0" promptText="Email" text="Description" />
+        <JFXTextField fx:id="statusID" layoutX="611.0" layoutY="34.0" promptText="OrderQty" text="Status" />
+        <JFXTextField fx:id="searchId" layoutX="14.0" layoutY="83.0" promptText="Search" />
+        <JFXButton buttonType="RAISED" layoutX="537.0" layoutY="83.0" onAction="#updateOnAction" prefHeight="27.0" prefWidth="80.0" text="Update" />
+        <JFXButton buttonType="RAISED" layoutX="656.0" layoutY="83.0" onAction="#refreshOnAction" prefHeight="27.0" prefWidth="80.0" text="Refresh" />
+        <JFXTreeTableView fx:id="table" layoutX="14.0" layoutY="153.0" prefHeight="291.0" prefWidth="754.0">
+            <columns>
+                <TreeTableColumn fx:id="itemCol" prefWidth="92.0" text="ItemID" />
+                <TreeTableColumn fx:id="nameCol" prefWidth="101.0" text="Name" />
+                <TreeTableColumn fx:id="desCol" prefWidth="222.0" text="Description" />
+                <TreeTableColumn fx:id="categoryCol" prefWidth="105.0" text="Category" />
+                <TreeTableColumn fx:id="statusCol" prefWidth="111.0" text="Status" />
+                <TreeTableColumn fx:id="optionCol" prefWidth="122.0" text="Option" />
+            </columns>
+        </JFXTreeTableView>
+        <JFXButton contentDisplay="GRAPHIC_ONLY" layoutX="35.0" layoutY="347.0" text="Back" />
+        <ImageView fitHeight="28.0" fitWidth="34.0" layoutX="14.0" onMouseReleased="#backBtnOnAction" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../Assets/bckimg.png" />
+            </image>
+        </ImageView>
+        <JFXComboBox fx:id="categoryComboID" layoutX="469.0" layoutY="34.0" prefHeight="27.0" prefWidth="137.0" promptText="Category" />
+    </children>
+
+</AnchorPane>

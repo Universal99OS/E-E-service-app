@@ -91,30 +91,28 @@ public class ItemDaoImpl implements ItemDao {
 
     @Override
     public List<ItemDto> getAll() {
-//        Session session = HibernateUtil.getSession();
-//        Query query = session.createQuery("FROM Item");
-//        List<Item> list = query.list();
-//
-//        List<ItemDto> itemDtos=new ArrayList<>();
-//
-//        for (Item item:list) {
-//            Orders orders = item.getOrders();
-//            new OrdersDto(
-//                    orders.getOrderId(),
-//                    orders.getDate()
-//            );
-//
-//            itemDtos.add(new ItemDto(
-//                    item.getItemId(),
-//                    item.getDescription(),
-//                    item.getName(),
-//                    item.getCategory(),
-//                    item.getStatus(),
-//
-//            ));
-//        }
-//        return itemDtos;
-        return null;
+        Session session = HibernateUtil.getSession();
+        Query query = session.createQuery("FROM Item");
+        List<Item> list = query.list();
+
+        List<ItemDto> itemDtos=new ArrayList<>();
+
+        for (Item item:list) {
+            Orders orders = item.getOrders();
+            Customer customer = orders.getCustomer();
+            CustomerDto cusDto = new CustomerDto(customer.getContactNum(), customer.getName(), customer.getEmail(), customer.getOrderQty());
+            OrdersDto ordersDto = new OrdersDto(orders.getOrderId(), orders.getDate(), cusDto);
+
+            itemDtos.add(new ItemDto(
+                    item.getItemId(),
+                    item.getDescription(),
+                    item.getName(),
+                    item.getCategory(),
+                    item.getStatus(),
+                    ordersDto
+            ));
+        }
+        return itemDtos;
     }
 
     @Override

@@ -23,12 +23,14 @@ public class ItemBoImpl implements ItemBo {
 
     @Override
     public boolean delete(ItemDto dto) {
+
         return false;
     }
 
     @Override
     public List<ItemDto> getAll() {
-        return null;
+
+        return itemDao.getAll();
     }
 
     @Override

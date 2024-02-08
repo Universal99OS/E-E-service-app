@@ -28,6 +28,13 @@ public class AdminFormController {
     }
 
     public void manageItemsBtnOnAction(ActionEvent actionEvent) {
+        Stage stage = (Stage)pane.getScene().getWindow();
+        try {
+            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/allItemsForm.fxml"))));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void manageMembersrBtnOnAction(ActionEvent actionEvent) {
