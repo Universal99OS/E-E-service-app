@@ -2,8 +2,12 @@ package dao.custom.impl;
 
 import dao.custom.ItemDao;
 import dao.util.HibernateUtil;
+import dto.CustomerDto;
 import dto.ItemDto;
+import dto.OrdersDto;
+import entity.Customer;
 import entity.Item;
+import entity.Orders;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -19,6 +23,24 @@ public class ItemDaoImpl implements ItemDao {
                 dto.getName(),
                 dto.getCategory(),
                 dto.getStatus());
+
+        OrdersDto ordersDto = dto.getOrdersDto();
+        CustomerDto customer = ordersDto.getCustomer();
+
+        Customer customerEntity = new Customer(
+                customer.getContactNum(),
+                customer.getName(),
+                customer.getEmail(),
+                20
+        );
+        Orders orders = new Orders(
+                ordersDto.getOrderId(),
+                ordersDto.getDate()
+        );
+
+        orders.setCustomer(customerEntity);
+
+        item.setOrders(orders);
 
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
@@ -69,22 +91,30 @@ public class ItemDaoImpl implements ItemDao {
 
     @Override
     public List<ItemDto> getAll() {
-        Session session = HibernateUtil.getSession();
-        Query query = session.createQuery("FROM Item");
-        List<Item> list = query.list();
-
-        List<ItemDto> itemDtos=new ArrayList<>();
-
-        for (Item item:list) {
-            itemDtos.add(new ItemDto(
-                    item.getItemId(),
-                    item.getDescription(),
-                    item.getName(),
-                    item.getCategory(),
-                    item.getStatus()
-            ));
-        }
-        return itemDtos;
+//        Session session = HibernateUtil.getSession();
+//        Query query = session.createQuery("FROM Item");
+//        List<Item> list = query.list();
+//
+//        List<ItemDto> itemDtos=new ArrayList<>();
+//
+//        for (Item item:list) {
+//            Orders orders = item.getOrders();
+//            new OrdersDto(
+//                    orders.getOrderId(),
+//                    orders.getDate()
+//            );
+//
+//            itemDtos.add(new ItemDto(
+//                    item.getItemId(),
+//                    item.getDescription(),
+//                    item.getName(),
+//                    item.getCategory(),
+//                    item.getStatus(),
+//
+//            ));
+//        }
+//        return itemDtos;
+        return null;
     }
 
     @Override

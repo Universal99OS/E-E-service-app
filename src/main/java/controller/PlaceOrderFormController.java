@@ -3,16 +3,21 @@ package controller;
 import Bo.BoFactory;
 import Bo.custom.CustomerBo;
 import Bo.custom.ItemBo;
+import Bo.custom.OrdersBo;
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import dao.util.BoType;
 import dto.CustomerDto;
+import dto.ItemDto;
+import dto.OrdersDto;
 import dto.tableModel.ItemTm;
+import entity.Orders;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.cell.TreeItemPropertyValueFactory;
@@ -48,6 +53,8 @@ public class PlaceOrderFormController {
     private CustomerBo customerBo= BoFactory.getInstance().getBO(BoType.CUSTOMER);
     private ItemBo itemBo=BoFactory.getInstance().getBO(BoType.ITEM);
 
+    private OrdersBo ordersBo=BoFactory.getInstance().getBO(BoType.ORDERS);
+
     private int itemIdNum= Integer.parseInt(itemBo.getNextItemId());
 
     public void initialize(){
@@ -76,7 +83,7 @@ public class PlaceOrderFormController {
     }
 
     private void setOrderID() {
-
+        orderId.setText(ordersBo.nextOrderID());
     }
 
     private void loadStatus() {
@@ -159,6 +166,41 @@ public class PlaceOrderFormController {
 
 
     public void placeOrderOnAction(ActionEvent actionEvent) {
+        String string = customersComboBoxId.getSelectionModel().getSelectedItem().toString();
+        CustomerDto customer = null;
+        for (CustomerDto customerDto:customers) {
+            if(customerDto.getContactNum().equals(string)){
+                customer=customerDto;
+            }
+
+        }
+        OrdersDto ordersDto = new OrdersDto(
+                orderId.getText(),
+                "2024/02/08",
+                customer
+        );
+
+        ordersBo.save(ordersDto);
+
+        for (ItemTm tm:itemTms) {
+            itemBo.save(new ItemDto(
+                    tm.getItemId(),
+                    tm.getDescription(),
+                    tm.getName(),
+                    tm.getCategory(),
+                    tm.getStatus(),
+                    ordersDto
+            ));
+        }
+
+        setOrderID();
+
+
+        new Alert(Alert.AlertType.CONFIRMATION,"Succefully Add the order");
+
+
+
+
 
     }
 

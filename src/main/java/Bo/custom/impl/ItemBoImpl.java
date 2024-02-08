@@ -12,7 +12,8 @@ public class ItemBoImpl implements ItemBo {
     ItemDao itemDao= DaoFactory.getInstance().getDao(BoType.ITEM);
     @Override
     public boolean save(ItemDto dto) {
-        return false;
+
+        return itemDao.save(dto);
     }
 
     @Override

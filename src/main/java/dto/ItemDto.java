@@ -15,4 +15,5 @@ public class ItemDto {
     private String name;
     private String category;
     private String status;
+    private OrdersDto ordersDto;
 }
