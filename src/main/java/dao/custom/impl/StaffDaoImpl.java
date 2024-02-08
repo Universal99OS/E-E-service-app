@@ -33,17 +33,12 @@ public class StaffDaoImpl implements StaffDao {
     }
 
     @Override
-    public boolean delete(StaffDto dto) {
-        Staff entity = new Staff(
-                dto.getContactNum(),
-                dto.getName(),
-                dto.getEmail(),
-                dto.getPassword(),
-                dto.getUserType()
-        );
+    public boolean delete(String id) {
+
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
-        session.delete(entity);
+        Staff staff = session.get(Staff.class, id);
+        session.delete(staff);
         transaction.commit();
         session.close();
         return true;

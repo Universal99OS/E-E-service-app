@@ -89,7 +89,7 @@ public class AllMembersFormController {
             ));
 
             button.setOnAction(actionEvent -> {
-                boolean delete = staffBo.delete(dto);
+                boolean delete = staffBo.delete(dto.getContactNum());
 
                 if(delete){
                     new Alert(Alert.AlertType.CONFIRMATION,"Succefully Deleted").show();

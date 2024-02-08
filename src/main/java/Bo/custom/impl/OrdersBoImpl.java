@@ -23,9 +23,10 @@ public class OrdersBoImpl implements OrdersBo {
     }
 
     @Override
-    public boolean delete(OrdersDto dto) {
-        return false;
+    public boolean delete(String id) {
+        return ordersDao.delete(id);
     }
+
 
     @Override
     public List<OrdersDto> getAll() {

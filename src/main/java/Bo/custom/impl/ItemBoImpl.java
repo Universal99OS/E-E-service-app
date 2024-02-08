@@ -18,13 +18,14 @@ public class ItemBoImpl implements ItemBo {
 
     @Override
     public boolean update(ItemDto dto) {
-        return false;
+
+        return itemDao.update(dto);
     }
 
     @Override
-    public boolean delete(ItemDto dto) {
+    public boolean delete(String id) {
+        return itemDao.delete(id);
 
-        return false;
     }
 
     @Override

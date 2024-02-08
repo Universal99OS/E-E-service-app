@@ -2,10 +2,7 @@ package controller;
 
 import Bo.BoFactory;
 import Bo.custom.ItemBo;
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXTextField;
-import com.jfoenix.controls.JFXTreeTableView;
-import com.jfoenix.controls.RecursiveTreeItem;
+import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import dao.util.BoType;
 import dto.ItemDto;
@@ -28,7 +25,6 @@ public class AllItemsFormController {
     public JFXTextField itemId;
     public JFXTextField nameId;
     public JFXTextField descriptionId;
-    public JFXTextField statusID;
     public JFXTextField searchId;
     public JFXTreeTableView<ItemTm> table;
     public TreeTableColumn itemCol;
@@ -37,8 +33,11 @@ public class AllItemsFormController {
     public TreeTableColumn categoryCol;
     public TreeTableColumn statusCol;
     public TreeTableColumn optionCol;
-
+    public JFXComboBox categoryComboID;
+    public JFXComboBox statusComboId;
     ItemBo itemBo= BoFactory.getInstance().getBO(BoType.ITEM);
+
+    private List<ItemDto> all = null;
 
     public void initialize(){
         itemCol.setCellValueFactory(new TreeItemPropertyValueFactory<>("itemId"));
@@ -50,10 +49,42 @@ public class AllItemsFormController {
 
         loadItemTable();
 
+        table.getSelectionModel().selectedItemProperty().addListener((observableValue, itemTmTreeItem, newValue) -> {
+            try {
+                setData(newValue);
+            }catch (NullPointerException e){
+                e.printStackTrace();
+            }
+        });
+
+    }
+
+    private void setData(TreeItem<ItemTm> newValue) {
+        try {
+            ItemTm value = newValue.getValue();
+            itemId.setEditable(false);
+            itemId.setText(value.getItemId());
+            nameId.setText(value.getName());
+            descriptionId.setText(value.getDescription());
+
+            categoryComboID.getItems().clear();
+            categoryComboID.getItems().addAll("Electronic", "Electrical");
+            categoryComboID.setValue(value.getCategory());
+
+            statusComboId.getItems().clear();
+            statusComboId.getItems().addAll("Pending", "Processing", "Completed", "Closed");
+            statusComboId.setValue(value.getStatus());
+
+        }catch (NullPointerException e){
+            e.printStackTrace();
+        }
+
+
     }
 
     private void loadItemTable() {
-        List<ItemDto> all = itemBo.getAll();
+        all = itemBo.getAll();
+
         ObservableList<ItemTm> list= FXCollections.observableArrayList();
 
         for (ItemDto dto: all) {
@@ -86,6 +117,17 @@ public class AllItemsFormController {
     }
 
     public void updateOnAction(ActionEvent actionEvent) {
+        for (ItemDto dto:all) {
+            if(dto.getItemId().equals(itemId.getText())){
+                dto.setName(nameId.getText());
+                dto.setDescription(descriptionId.getText());
+                dto.setStatus(statusComboId.getSelectionModel().getSelectedItem().toString());
+                dto.setCategory(categoryComboID.getSelectionModel().getSelectedItem().toString());
+                itemBo.update(dto);
+            }
+        }
+
+      loadItemTable();
     }
 
     public void refreshOnAction(ActionEvent actionEvent) {

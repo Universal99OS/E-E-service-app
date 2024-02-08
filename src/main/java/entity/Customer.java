@@ -2,10 +2,7 @@ package entity;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 
 @NoArgsConstructor
@@ -20,7 +17,7 @@ public class Customer {
     private String email;
     private int orderQty;
 
-    @OneToMany(mappedBy = "customer")
+    @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
     List<Orders> orders;
 
     public Customer(String contactNum, String name, String email, int orderQty) {

@@ -19,7 +19,7 @@ public class Orders {
     @JoinColumn(name="contactNum",nullable = false)
     private Customer customer;
 
-    @OneToMany(mappedBy = "orders")
+    @OneToMany(mappedBy = "orders",cascade =CascadeType.ALL)
     List<Item> items;
 
 

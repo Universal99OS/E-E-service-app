@@ -27,8 +27,8 @@ public class StaffBoImpl implements StaffBo {
     }
 
     @Override
-    public boolean delete(StaffDto dto) {
-        return staffDao.delete(dto);
+    public boolean delete(String id) {
+        return staffDao.delete(id);
     }
 
     @Override

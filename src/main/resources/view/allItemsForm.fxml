@@ -19,7 +19,6 @@
         <JFXTextField fx:id="itemId" layoutX="14.0" layoutY="34.0" promptText="Contact Num" text="Item ID" />
         <JFXTextField fx:id="nameId" layoutX="169.0" layoutY="34.0" prefHeight="27.0" prefWidth="137.0" promptText="Name" />
         <JFXTextField fx:id="descriptionId" layoutX="319.0" layoutY="34.0" promptText="Email" text="Description" />
-        <JFXTextField fx:id="statusID" layoutX="611.0" layoutY="34.0" promptText="OrderQty" text="Status" />
         <JFXTextField fx:id="searchId" layoutX="14.0" layoutY="83.0" promptText="Search" />
         <JFXButton buttonType="RAISED" layoutX="537.0" layoutY="83.0" onAction="#updateOnAction" prefHeight="27.0" prefWidth="80.0" text="Update" />
         <JFXButton buttonType="RAISED" layoutX="656.0" layoutY="83.0" onAction="#refreshOnAction" prefHeight="27.0" prefWidth="80.0" text="Refresh" />
@@ -40,6 +39,7 @@
             </image>
         </ImageView>
         <JFXComboBox fx:id="categoryComboID" layoutX="469.0" layoutY="34.0" prefHeight="27.0" prefWidth="137.0" promptText="Category" />
+      <JFXComboBox fx:id="statusComboId" layoutX="628.0" layoutY="34.0" prefHeight="27.0" prefWidth="137.0" promptText="Status" />
     </children>
 
 </AnchorPane>

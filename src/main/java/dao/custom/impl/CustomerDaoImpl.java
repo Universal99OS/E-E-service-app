@@ -1,9 +1,13 @@
 package dao.custom.impl;
 
+import dao.DaoFactory;
 import dao.custom.CustomerDao;
+import dao.custom.OrdersDao;
+import dao.util.BoType;
 import dao.util.HibernateUtil;
 import dto.CustomerDto;
 import entity.Customer;
+import entity.Orders;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -15,6 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerDaoImpl implements CustomerDao {
+
+    OrdersDao ordersDao=DaoFactory.getInstance().getDao(BoType.ORDERS);
 
     @Override
     public boolean save(CustomerDto dto) {
@@ -29,18 +35,38 @@ public class CustomerDaoImpl implements CustomerDao {
     }
 
     @Override
-    public boolean delete(CustomerDto dto) {
-        Customer entity=new Customer(
-                dto.getContactNum(),
-                dto.getName(),
-                dto.getEmail(),
-                dto.getOrderQty());
+    public boolean delete(String id) {
+//        Customer entity=new Customer(
+//                dto.getContactNum(),
+//                dto.getName(),
+//                dto.getEmail(),
+//                dto.getOrderQty());
+//        Session session = HibernateUtil.getSession();
+//        Transaction transaction = session.beginTransaction();
+//        session.delete(entity);
+//        transaction.commit();
+//        session.close();
+//        return true;
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
-        session.delete(entity);
+        Customer customer = session.get(Customer.class, id);
+
+        List<Orders> orders = customer.getOrders();
+
+        if(!orders.isEmpty()){
+            for (Orders orders1:orders) {
+                ordersDao.delete(orders1.getOrderId());
+            }
+
+            System.out.println("Deleted all the orders related this customer id:"+id);
+        }
+
+        session.delete(customer);
         transaction.commit();
         session.close();
+
         return true;
+
     }
 
     @Override

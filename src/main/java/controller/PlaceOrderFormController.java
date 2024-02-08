@@ -196,7 +196,9 @@ public class PlaceOrderFormController {
         setOrderID();
 
 
-        new Alert(Alert.AlertType.CONFIRMATION,"Succefully Add the order");
+        new Alert(Alert.AlertType.CONFIRMATION,"Succefully Add the order").show();
+
+        itemTms.clear();
 
 
 

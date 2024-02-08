@@ -8,6 +8,7 @@ import dto.OrdersDto;
 import entity.Customer;
 import entity.Item;
 import entity.Orders;
+import org.hibernate.IdentifierLoadAccess;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -51,18 +52,27 @@ public class ItemDaoImpl implements ItemDao {
     }
 
     @Override
-    public boolean delete(ItemDto dto) {
-        Item item=new Item(dto.getItemId(),
-                dto.getDescription(),
-                dto.getName(),
-                dto.getCategory(),
-                dto.getStatus());
+    public boolean delete(String id) {
+//        Item item=new Item(dto.getItemId(),
+//                dto.getDescription(),
+//                dto.getName(),
+//                dto.getCategory(),
+//                dto.getStatus());
+//
+//        Session session = HibernateUtil.getSession();
+//        Transaction transaction = session.beginTransaction();
+//        session.delete(item);
+//        transaction.commit();
+//        session.close();
+//        return true;
 
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
+        Item item = session.get(Item.class, id);
         session.delete(item);
         transaction.commit();
         session.close();
+
         return true;
     }
 
@@ -74,15 +84,24 @@ public class ItemDaoImpl implements ItemDao {
                 dto.getCategory(),
                 dto.getStatus());
 
+        OrdersDto ordersDto = dto.getOrdersDto();
+        CustomerDto customer = ordersDto.getCustomer();
+
+        Customer customer1 = new Customer(
+                customer.getContactNum(),
+                customer.getName(),
+                customer.getEmail(),
+                20
+        );
+
+        Orders orders = new Orders(ordersDto.getOrderId(), ordersDto.getDate());
+        orders.setCustomer(customer1);
+
+        item.setOrders(orders);
+
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
-        Item item1 = session.find(Item.class, item);
-        item1.setItemId(item.getItemId());
-        item1.setDescription(item.getDescription());
-        item1.setName(item.getName());
-        item1.setCategory(item.getCategory());
-        item1.setStatus(item.getStatus());
-        session.save(item1);
+        session.update(item);
         transaction.commit();
         session.close();
 

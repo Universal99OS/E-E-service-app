@@ -11,6 +11,7 @@ import dto.CustomerDto;
 import dto.tableModel.CustomerTm;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
+import javafx.scene.control.Alert;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,8 +31,8 @@ public class CustomerBoImpl implements CustomerBo {
     }
 
     @Override
-    public boolean delete(CustomerDto dto) {
-        return customerDao.delete(dto);
+    public boolean delete(String id) {
+        return customerDao.delete(id);
     }
 
     @Override
@@ -55,8 +56,14 @@ public class CustomerBoImpl implements CustomerBo {
             ));
 
             button.setOnAction(actionEvent -> {
-                delete(dto);
+                boolean delete = delete(dto.getContactNum());
                 acc.loadCustomerTable();
+
+                if(delete){
+                    new Alert(Alert.AlertType.CONFIRMATION,"Succefully deleted").show();
+                }else {
+                    new Alert(Alert.AlertType.ERROR,"something went wrong, Please re-check").show();
+                }
             });
         }
         return list;

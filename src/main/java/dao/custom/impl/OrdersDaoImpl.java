@@ -1,10 +1,14 @@
 package dao.custom.impl;
 
+import dao.DaoFactory;
+import dao.custom.ItemDao;
 import dao.custom.OrdersDao;
+import dao.util.BoType;
 import dao.util.HibernateUtil;
 import dto.CustomerDto;
 import dto.OrdersDto;
 import entity.Customer;
+import entity.Item;
 import entity.Orders;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -12,6 +16,8 @@ import org.hibernate.Transaction;
 import java.util.List;
 
 public class OrdersDaoImpl implements OrdersDao {
+
+    ItemDao itemDao= DaoFactory.getInstance().getDao(BoType.ITEM);
     @Override
     public boolean save(OrdersDto dto) {
         Orders orders = new Orders(
@@ -39,9 +45,22 @@ public class OrdersDaoImpl implements OrdersDao {
     }
 
     @Override
-    public boolean delete(OrdersDto dto) {
-        return false;
+    public boolean delete(String id) {
+        Session session = HibernateUtil.getSession();
+        Transaction transaction = session.beginTransaction();
+        Orders orders = session.get(Orders.class, id);
+        List<Item> items = orders.getItems();
+
+        if(!items.isEmpty()){
+            for (Item item:items) {
+               itemDao.delete(item.getItemId());
+            }
+        }
+
+        session.delete(orders);
+        return true;
     }
+
 
     @Override
     public boolean update(OrdersDto dto) {
