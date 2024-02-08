@@ -88,14 +88,20 @@ public class AllItemsFormController {
         ObservableList<ItemTm> list= FXCollections.observableArrayList();
 
         for (ItemDto dto: all) {
+            JFXButton button = new JFXButton("Delete");
+
             list.add(new ItemTm(
                     dto.getItemId(),
                     dto.getDescription(),
                     dto.getName(),
                     dto.getCategory(),
                     dto.getStatus(),
-                    new JFXButton("Delete")
+                    button
             ));
+
+            button.setOnAction(actionEvent -> {
+                itemBo.delete(dto.getItemId());
+            });
         }
 
         TreeItem<ItemTm> recursiveTreeItem = new RecursiveTreeItem<>(list, RecursiveTreeObject::getChildren);
